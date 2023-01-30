@@ -1,0 +1,168 @@
+﻿<div class="container">
+
+    <div class="pagetitle">
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="index.html">eVoucher</a></li>
+                <li class="breadcrumb-item active">eVoucher List</li>
+            </ol>
+        </nav>
+    </div>
+
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">eVoucher List</h5>
+
+                        <div class="col-lg-12">
+                            <div class="justify-content-lg-end">
+                                <a href="/eVoucher/EvoucherNew/" class="btn btn-success">Add</a>
+                                <a href="/eVoucher/EvoucherDetail/" class="btn btn-info">Detail</a>
+                             </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <table id="myTbl" class="table nowrap" style="width:100%;">
+                                <thead>
+                                    <tr>
+                                        <th>VoucherNo.</th>
+                                        @*<th>Customer</th>*@
+                                        @*<th>Payment Method</th>*@
+                                        <th>Title</th>
+                                        <th>Description</th>
+                                        <th>Expiry Date</th>
+                                        <th>Amount</th>
+                                        <th>Discount</th>
+                                        <th>Quantity</th>
+                                        <th>Buy Type</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tfoot></tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+
+@section Scripts{
+
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+           FillGrid();
+        })
+
+        function FillGrid() {
+            $("#myTbl").DataTable(
+                {
+                    "destroy": true,
+                    responsive: false,
+                    "pageLength": 10,
+                    "scrollX": true,
+                    'stateSave': true,
+                    "order": [[1, "asc"]],
+                    dom: "<'row'<'col-sm-6'B> >" +
+                        "<'row'<'col-sm-12'tr>>" +
+                        "<'row'<'col-sm-4'l><'col-sm-4'i><'col-sm-4'p>>",
+                    buttons: [
+                        {
+                            extend: 'excelHtml5',
+                            footer: true,
+                            title: 'eVoucher List',
+                            exportOptions: {
+                                columns: ':visible'
+                            },
+                            filename: function () {
+                                return "eVoucher List";
+                            },
+                            customize: function (xlsx) {
+                                var sheet = xlsx.xl.worksheets['sheet1.xml'];
+                                $('c[r=A1]', sheet).attr('s', '50');
+                                $('c[r=A1]', sheet).attr('s', '2');
+                                $('c[r=A2]', sheet).attr('s', '50');
+                                $('c[r=A2]', sheet).attr('s', '2');
+                            }
+                        }
+                    ],
+                    "ajax": {
+                        "url": "/api/eVoucherAPI/GeteVouchers/" ,
+                        "type": "GET",
+                        "datatype": "json",
+                        "dataSrc": ''
+                    },
+                    "columns": [
+                        { "data": "VoucherNo" },
+                        //{ "data": "CustomerName" },
+                        //{ "data": "PaymentMethod" },
+                        { "data": "Title" },
+                        { "data": "Description" },
+                        { "data": "ExpiryDate" },
+                        { "data": "Amount" },
+                        { "data": "Discount" },
+                        { "data": "Quantity" },
+                        { "data": "BuyType" },
+                        { "data": "Status" },
+                    ],
+                    "columnDefs": [
+                        {
+
+                            "targets": [3],
+                            "data": " ",
+                            "type": "date",
+                            "render": function (data, type, row) {
+                                if (data != null)
+                                    return moment(data).format("DD-MMM-YYYY HH:mm:ss");
+                                else
+                                    return '';
+                            }
+                        },
+                        {
+                            "targets": 8,
+                            "data": "Status",
+                            "render": function (data, type, row) {
+                                var str = "";
+                                if (row.Status == "A") {
+                                    return "Active";
+                                }
+                                else if (row.Status == "I") {
+                                    return "Inactive";
+                                }
+                                else  return "-";
+                            }
+                        }
+                    ]
+
+                }
+            );
+        }
+
+        //function FillGrid() {
+        //    $.ajax({
+        //        type: 'GET',
+        //        url: '/api/eVoucherAPI/GeteVouchers/',
+        //        success: function (data) {
+        //            if (data.percentageProcessed != 100) {
+        //                document.getElementById('progressBar').value = data.percentageProcessed;
+        //                doAjax();
+        //            } else {
+        //                document.getElementById('progressBar').value = 100;
+        //            }
+        //        }
+        //    });
+
+        //}
+    </script>
+}
+
+
+
+
+

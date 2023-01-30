@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eVoucherCMS", "eVoucherCMS\eVoucherCMS.csproj", "{C1B91853-F192-4CE3-BDF1-6B33C783A7FD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C1B91853-F192-4CE3-BDF1-6B33C783A7FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1B91853-F192-4CE3-BDF1-6B33C783A7FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1B91853-F192-4CE3-BDF1-6B33C783A7FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1B91853-F192-4CE3-BDF1-6B33C783A7FD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {936429A2-4DEE-4A7D-9FD7-352D5FE82CEF}
+	EndGlobalSection
+EndGlobal
